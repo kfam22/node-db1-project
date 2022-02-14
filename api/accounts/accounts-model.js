@@ -1,4 +1,5 @@
 const getAll = () => {
+  return 'get wired'
   // DO YOUR MAGIC
 }
 
