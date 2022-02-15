@@ -20,11 +20,14 @@ const create = account => {
 }
 
 const updateById = (id, account) => {
-  return 'updateById wired'
+  return db('accounts')
+    .where('id', id)
+    .update(account)
+    .then(count => (count > 0 ? getById(id) : null));
 }
 
 const deleteById = id => {
-  return 'deleteById wired'
+  return db('accounts').where('id', id).del()
 }
 
 module.exports = {
