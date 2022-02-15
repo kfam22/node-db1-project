@@ -14,7 +14,7 @@ const getById = id => {
 }
 
 const create = account => {
-  return 'create wired'
+  return db('accounts').insert({})
 }
 
 const updateById = (id, account) => {
