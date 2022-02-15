@@ -1,5 +1,6 @@
 const Accounts = require('./accounts-model');
-const yup = require('yup')
+// const yup = require('yup');
+const db = require('../../data/db-config');
 
 
 // const accountPayloadSchema = yup.object({
@@ -43,6 +44,7 @@ exports.checkAccountPayload = (req, res, next) => {
   if(error.message){
     next(error)
   } else {
+    req.body.name = name.trim();
     next()
   }
   }
@@ -54,10 +56,19 @@ exports.checkAccountPayload = (req, res, next) => {
 // - If budget is not able to be converted into a number, return `{ message: "budget of account must be a number" }`
 // - If budget is a negative number or over one million, return  `{ message: "budget of account is too large or too small" }`
 
-exports.checkAccountNameUnique = (req, res, next) => {
-  console.log('checkAccountNameUnique middleware')
-  next()
-  // DO YOUR MAGIC
+exports.checkAccountNameUnique = async (req, res, next) => {
+  try{
+    const existing = await db('accounts')
+    .where('name', req.body.name.trim())
+    .first()
+    if(existing){
+      next({ status: 400, message: 'that name is taken'})
+    }else {
+      next()
+    }
+  } catch (err){
+    next(err)
+  }
 }
 
 exports.checkAccountId = async (req, res, next) => {
