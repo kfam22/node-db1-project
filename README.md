@@ -101,7 +101,7 @@ db('foo-table').where('id', id).delete() // resolves to the **number of records*
 - Schedule time to review, refine, and assess your work.
 - Perform basic professional polishing including spell-checking and grammar-checking on your work.
 
-### Task 3: Stretch Problems
+### Task 3: Stretch Problems!
 
 The following exercises **require research**, the concepts needed to complete them have not been covered in class yet.
 
